@@ -77,7 +77,7 @@ class Menu {
     }
 
     createMovie() {
-        let name = prompt("Enter name for new Movie");
+        let name = prompt("Enter name of movie:");
         this.movies.push(new Movie(name));
     }
 
@@ -102,5 +102,5 @@ class Menu {
     }
 }
 
-let Menu = new Menu();
-Menu.start();
+let menu = new Menu();
+menu.start();
