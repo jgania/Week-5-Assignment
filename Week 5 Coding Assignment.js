@@ -28,7 +28,7 @@ class Menu {
     }
     start() {
         let selection = this.showMainMenuOptions();
-        while (selection != 0; ) {
+        while (selection != 0) {
             switch (selection) {
                 case "1": 
                     this.createMovie();
@@ -71,7 +71,7 @@ class Menu {
     displayMovies() {
         let moviestring = ""
         for (let i=0; i < this.movies.length; i++) {
-            moviestring += i + ") " + this.movies(i).name + "\n":
+            moviestring += i + ") " + this.movies(i).name + "\n";
         }
         alert(moviestring);
     }
