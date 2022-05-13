@@ -1,81 +1,106 @@
-
-class Movie {
-    constructor(name){
-        this.name = name;
-            }
-    describe(){
-        return `${this.name} is a ${this.genere} movie`;
+class Rating {
+    constructor(rating) {
+        this.rating = rating;
     }
 }
 
-class Review {
-    constructor(rating){
-        this.rating = rating;
-        this.movies = []
+class Movie {
+    constructor(name) {
+        this.name = name;
+        this.ratings = [];
     }
-
-    addMovie(movie){
-        if (movie instanceof Movie){
-            this.movies.push(movie);
-        } else {
-            throw new Error(`You can only add an instance of Movie. Argument is not a movie: ${movie}`);
+    addRating(rating) {
+        if (rating instanceof Rating) {
+            this.ratings.push(rating);
+        } else{
+            throw new Error (`You can only add an instance of Rating. Argument is not a rating: ${rating}`);
         }
     }
-    describe(){
-        return `${this.rating} has been given to ${this.movies.length} movies`;
+    describe() {
+        return `${this.movie} has ${this.ratings.length} ratings`;
     }
 }
 
 class Menu {
-    constructor(){
-        this.ratings = [];
-        this.selectedReview = null
+    constructor() {
+        this.movies = [];
+        this.selectedMovie = null;
     }
-    start(){
-        let selection = this.showMenuOptions();
-        while (selection != 0){
-            switch (selection){
-                case "1":
-                    this.createReview();
+    start() {
+        let selection = this.showMainMenuOptions();
+        while (selection != 0; ) {
+            switch (selection) {
+                case "1": 
+                    this.createMovie();
                     break;
                 case "2":
-                    this.viewReview();
+                    this.viewMovie();
                     break;
                 case "3":
-                    this.deleteReview();
+                    this.deleteMovie();
                     break;
                 case "4":
-                    this.displayRatings();
+                    this.displayMovies();
                     break;
                 default:
-                    selection = 0
+                    selection = 0;
             }
-            selection = this.showMenuOptions();
+            selection = this.showMainMenuOptions();
         }
         alert("Goodbye");
     }
-
-    showMenuOptions(){
+    showMainMenuOptions() {
         return prompt(`
-            0: Exit
-            1: Create Review
-            2: View Review
-            3: Delete Review
-            4: Display All Reviews
+        0) Exit
+        1) Create Movie
+        2) View Movie
+        3) Delete Movie
+        4) Display All Movies
+        `)
+    }
+    showMovieMenuOptions(teamInfo) {
+        return prompt(`
+        0) Return
+        1) Create Rating
+        2) Delete Rating
+
+        ${teamInfo}
         `);
     }
 
-    displayRatings(){
-        let ratingString = ""
-        for (let i = 0; i < this.ratings.length; i++){
-            ratingString += i + ") " + this.ratings[i].rating + "\n";
+    displayMovies() {
+        let moviestring = ""
+        for (let i=0; i < this.movies.length; i++) {
+            moviestring += i + ") " + this.movies(i).name + "\n":
         }
-        alert(ratingString);
+        alert(moviestring);
     }
-    createReview(){
-        let rating = prompt("Enter rating for new review");
-        this.ratings.push(new Review(rating));
+
+    createMovie() {
+        let name = prompt("Enter name for new Movie");
+        this.movies.push(new Movie(name));
+    }
+
+    viewMovie() {
+        let index = prompt("Enter the index of the movie you wish to view:");
+        if (index > -1 && index < this.movies.length) {
+            this.selectedMovie = this.movies[index];
+            let description = "Movie Name: " + this.selectedMovie.name + "\n";
+            for (let i = 0; i < this.selectedMovie.ratings.length; i++) {
+                description += i + ") " + this.selectedMovie.ratings[i].rating + "\n";
+            }
+            let selection = this.showMovieMenuOptions(description);
+            switch(selection) {
+                case "1":
+                    this.createRating();
+                    break;
+                case "2": 
+                    this.deleteRating();
+                    break;
+            }
+        }
     }
 }
 
-
+let Menu = new Menu();
+Menu.start();
