@@ -100,6 +100,25 @@ class Menu {
             }
         }
     }
+    createRating() {
+        let rating = prompt("Enter new rating:")
+        if (rating > -1 && rating < 11) {
+            this.selectedMovie.rating.push(new Rating(rating));
+        } else{
+            throw new Error("Rating must be a number between 1 and 10");
+    }
+    deleteRating() {
+        let index = prompt("Enter the index of the rating you wish to delete:");
+        if (index > -1 && index < this.selectedMovie.ratings.length){
+            this.selectedMovie.ratings.splice(index, 1);
+        }
+    }
+    deleteMovie() {
+        let index = prompt("Enter the index of the team you wish to delete:");
+        if (index > -1 && index < this.movies.length){
+            this.movies.splice(index, 1);
+        }
+    }
 }
 
 let menu = new Menu();
