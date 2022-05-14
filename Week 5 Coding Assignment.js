@@ -106,6 +106,7 @@ class Menu {
             this.selectedMovie.rating.push(new Rating(rating));
         } else{
             throw new Error("Rating must be a number between 1 and 10");
+        }
     }
     deleteRating() {
         let index = prompt("Enter the index of the rating you wish to delete:");
